@@ -15,7 +15,7 @@ jobs:
 
     - name: Checkout released tag
       run: |
-        echo ::set-env name=RELEASE_VERSION::${GITHUB_REF#refs/tags/v}
+        echo "RELEASE_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
     - name: Set up Docker Buildx
       uses: crazy-max/ghaction-docker-buildx@v3
@@ -45,9 +45,8 @@ jobs:
           --file ./mainline/Dockerfile ./mainline
 
     - name: Update Docker Hub Description
-      uses: peter-evans/dockerhub-description@v2.1.0
-      env:
-        DOCKERHUB_USERNAME: kisioj
-        DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
-        DOCKERHUB_REPOSITORY: kisioj/nginx-nchan
-        README_FILEPATH: ./README.md
+      uses: peter-evans/dockerhub-description@v3
+      with:
+        username: kisioj
+        password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+        repository: kisioj/nginx-nchan
