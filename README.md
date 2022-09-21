@@ -3,18 +3,18 @@
 
 # Supported tags and respective `Dockerfile` links
 
--	[`1.0.1`, `latest`](https://github.com/weseek/docker-nchan/blob/9d21fd952fdb4b7153bf79aa25ac4bf431777204/mainline/Dockerfile)
+-	[`1.3.4`, `latest`](https://github.com/kisioj/docker-nchan/blob/9d21fd952fdb4b7153bf79aa25ac4bf431777204/mainline/Dockerfile)
 
 # How to use this image
 
 ## Launch simply
 
 ```console
-$ docker run -d weseek/nginx-nchan
+$ docker run -d kisioj/nginx-nchan
 ```
 
 - The container provides nginx on port 80 and the endpoint `/pubsub` to publish/subscribe
-- See also: [default.conf](https://github.com/weseek/docker-nchan/blob/9d21fd952fdb4b7153bf79aa25ac4bf431777204/mainline/conf.d/default.conf)
+- See also: [default.conf](https://github.com/kisioj/docker-nchan/blob/9d21fd952fdb4b7153bf79aa25ac4bf431777204/mainline/conf.d/default.conf)
 
 Alternatively, a simple `Dockerfile` can be used to generate a new image that includes the necessary content (which is a much cleaner solution than the bind mount above):
 

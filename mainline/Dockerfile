@@ -4,12 +4,12 @@
 ##
 ## builder
 ##
-FROM debian:buster-slim AS builder
-LABEL maintainer Yuki Takei <yuki@weseek.co.jp>
+FROM debian:bullseye-slim AS builder
+LABEL maintainer="Christopher Jura <kisioj@gmail.com>"
 
-ENV NGINX_VERSION 1.19.1
-ENV NGINX_PKG_RELEASE 1~buster
-ENV NCHAN_VERSION 1.2.7
+ENV NGINX_VERSION 1.23.1
+ENV NGINX_PKG_RELEASE 1~bullseye
+ENV NCHAN_VERSION 1.3.4
 
 ENV MODULES_DIR /usr/local/nginx/modules
 ENV DEBIAN_FRONTEND noninteractive
@@ -21,7 +21,7 @@ RUN apt-get install --no-install-recommends --no-install-suggests -y gnupg1 ca-c
 RUN apt-get install -y dpkg-dev libpcre3-dev zlib1g-dev
 
 # retrieve nginx source
-RUN echo "deb-src https://nginx.org/packages/mainline/debian/ buster nginx" >> /etc/apt/sources.list.d/nginx.list
+RUN echo "deb-src https://nginx.org/packages/mainline/debian/ bullseye nginx" >> /etc/apt/sources.list.d/nginx.list
 RUN NGINX_GPGKEY=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62; \
   KEY_SERVER=hkp://keyserver.ubuntu.com:80; \
   apt-key adv --keyserver "$KEY_SERVER" --keyserver-options timeout=10 --recv-keys "$NGINX_GPGKEY"
@@ -45,8 +45,8 @@ RUN mv objs/ngx_nchan_module.so ${MODULES_DIR}
 ##
 ## release
 ##
-FROM nginx:1.19.1
-LABEL maintainer Yuki Takei <yuki@weseek.co.jp>
+FROM nginx:1.23.1
+LABEL maintainer="Christopher Jura <kisioj@gmail.com>"
 
 ENV MODULES_DIR /usr/local/nginx/modules
 
